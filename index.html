@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Susen Halder — Filmexss | Video Editor & Videographer</title>
+  <style>
+    @media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 150px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#ffffffd5;
+      --accent1:#1945be;
+      --accent2:#06b6d4;
+      --glass: rgba(249, 249, 250, 0.226);
+      --radius: 14px;
+      --maxw:1280px;
+      --gap:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(92, 7, 240, 0.295), transparent),
+                  radial-gradient(800px 400px at 90% 90%, rgba(10, 165, 192, 0.342), transparent),
+                  var(--bg);
+      color:#ffffff;
+      line-height:1.45;
+      padding:0 0 40px 0;
+      min-height:100vh;
+    }
+
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:100px 24px 0}
+
+    /* Header */
+    header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(8px);background:rgba(11, 18, 32, 0.637);border-bottom:1px solid rgba(255,255,255,0.06)}
+    .nav{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:14px;align-items:center}
+    .brand .logo{width:48px;height:48px;border-radius:12px;overflow:hidden;}
+    .brand h1{margin:0;font-size:18px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+
+    nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .navlink{background:transparent;border:1px solid rgba(50, 221, 27, 0.685);padding:8px 12px;border-radius:10px;color:#ffffff;text-decoration:none;font-weight:600}
+    .navlink:hover{border-color:rgba(11, 201, 185, 0.685)}
+    .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:10px 16px;border-radius:12px;border:0;color:rgb(255, 255, 255);font-weight:700;cursor:pointer;text-decoration:none}
+
+    /* 3 dot / hamburger */
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.904);
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.2fr 480px;gap:36px;align-items:center;margin:0 0 36px 0}
+    .intro h2{font-size:40px;margin:0 0 8px 0;letter-spacing:-0.4px}
+    .intro h3{margin:0;color:var(--muted);font-weight:600}
+    .roles{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+    .pill{background:linear-gradient(90deg, rgba(28, 0, 128, 0), rgba(12, 0, 0, 0.315));padding:8px 12px;border-radius:999px;font-weight:600;border:1px solid rgba(17, 209, 119, 0.616)}
+
+    .hero-card{background:linear-gradient(180deg, rgba(155, 153, 153, 0.116), rgba(113, 8, 184, 0.329));padding:18px;border-radius:16px;border:1px solid rgba(214, 24, 24, 0.527);box-shadow:0 10px 30px rgba(13, 49, 209, 0.877)}
+    .profile{display:flex;gap:16px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:14px;overflow:hidden;}
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .stat{background:var(--glass);padding:10px;border-radius:12px;font-weight:700;color:var(--muted);min-width:110px;text-align:center}
+
+    /* Sections */
+    .section{margin:36px 0}
+    .section h4{margin:0 0 12px 0}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .card{background:linear-gradient(180deg,hsla(258, 95%, 44%, 0.651),#0591aaee);border:1px solid rgb(255, 255, 255);border-radius:16px;padding:16px}
+
+    /* Skills */
+    .skills-grid{display:flex;gap:12px;flex-wrap:wrap}
+    .skill{background:linear-gradient(90deg, rgba(104, 5, 150, 0.329), transparent);padding:14px;border-radius:12px;min-width:160px}
+    .skill h5{margin:0 0 6px 0}
+    .skill p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Portfolio */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
+    .project{position:relative;border-radius:12px;overflow:hidden;background:#071021;border:1px solid rgba(255,255,255,0.03)}
+    .project img{width:100%;height:220px;object-fit:cover;display:block}
+    .project .meta{position:absolute;left:12px;bottom:12px;background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));padding:8px 10px;border-radius:8px;font-weight:700}
+
+    /* Contact */
+    .contact{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+    .contact .email{background:var(--card);padding:14px;border-radius:12px;flex:1;min-width:300px}
+    .contact .info{flex:1;min-width:280px}
+
+    footer{margin-top:36px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr}
+      .portfolio-grid{grid-template-columns:repeat(1,1fr)}
+      .hero-card{order:2}
+      .about{grid-template-columns:1fr}
+    }
+
+    /* Phone size menu */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        background: rgba(11,18,32,0.95);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 12px;
+        border-radius: 12px;
+      }
+      nav.show { display: flex; }
+      .menu-toggle { display: block; }
+    }
+
+    /* FX logo image */
+    .logo img {width:100%;height:100%;object-fit:cover;border-radius:12px;}
+    .avatar img {width:100%;height:100%;object-fit:cover;border-radius:14px;}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">
+          <img src="https://i.postimg.cc/NGnqSmLM/Abstract-Illustrative-Stream-Studio-Logo-2.png" alt="Filmexss Logo">
+        </div>
+        <div>
+          <h1>Filmexss</h1>
+          <p>Studio — Susen Halder</p>
+        </div>
+      </div>
+
+      <!-- 3 dot menu button -->
+      <div class="menu-toggle" id="menuToggle">☰</div>
+
+      <!-- Navbar -->
+      <nav id="navbar">
+        <a class="navlink" href="#home">Home</a>
+        <a class="navlink" href="#about">About</a>
+        <a class="navlink" href="#skills">Skills</a>
+        <a class="navlink" href="#portfolio">Projects</a>
+        <a class="navlink" href="https://drive.google.com/file/d/1ZWHJZpphfepReaTHeCBTJlqPQ77PJ3jh/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+        <a class="btn" id="hireBtn" href="https://wa.me/8801859960199?text=Hi%20Susen,%20I%20want%20to%20hire%20you" target="_blank" rel="noopener">Hire Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Rest of your sections (Hero, About, Skills, Portfolio, Contact, Footer) remain SAME -->
+  <div class="wrap" id="home">
+    <main>
+      <!-- তোমার আগের Hero / About / Skills / Portfolio / Contact section 그대로 রাখলাম -->
+      <!-- আমি শুধু header অংশে 3 dot menu system add করেছি -->
+    </main>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year')?.textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("show");
+    });
+  </script>
+  </header>
+
+  <div class="wrap" id="home">
+    <main>
+      <section class="hero">
+        <div class="intro">
+          <h2>Hello — I'm <strong>Susen Halder</strong>.</h2>
+          <h3>I’m fully ready to contribute everything needed for your company’s growth.</h3>
+          <p class="muted" style="margin-top:14px">I craft cinematic stories, edit compelling videos, and grow brands with high-converting digital campaigns.</p>
+          <div class="roles" style="margin-top:18px">
+            <div class="#">🎯 Digital Marketing</div>
+            <div class="#">✂️ Video Editing</div>
+            <div class="#">🎥 Videography</div>
+            <div class="#">💻 Graphic Design</div>
+            <div class="#">📸 Photography</div>
+            <div class="#">🧠 Content Strategy</div>
+            <div class="#">📱 Social Media Management</div>
+          </div>
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn" href="https://wa.me/8801859960199?text=Hi%20Susen,%20I%20want%20to%20hire%20you" target="_blank" rel="noopener">Hire Me </a>
+            <a class="navlink" href="#portfolio">See Projects</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="profile">
+            <div class="avatar">
+              <img src="https://i.postimg.cc/9Q6fhsMD/8e830265-19af-40f2-bb9a-f3610e18d425.png" alt="Susen Halder">
+            </div>
+            <div>
+              <div style="font-weight:800;font-size:16px">Susen Halder</div>
+              <div style="color:var(--muted);font-size:13px">Filmexss — Video Editor & Videographer</div>
+              <div class="stats">
+                <div class="stat">100+ Projects</div>
+                <div class="stat">5+ Years Exp</div>
+                <div class="stat">Clients Worldwide</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <div style="font-weight:700">What I do</div>
+            <p class="muted" style="margin-top:6px;font-size:13px">End-to-end services: filming, editing, color, motion design, and paid campaigns. I focus on storytelling and measurable growth.</p>
+          </div>
+        </aside>
+      </section>
+
+      <!-- About -->
+      <section class="section" id="about">
+        <h4>About Me</h4>
+        <div class="about">
+          <div class="card">
+            <p>I'm <strong>Susen Halder</strong>, founder of <strong>Filmexss</strong>. With 5+ years of experience in video editing, cinematography, color grading, motion graphics, and digital marketing, I help brands tell powerful stories and get measurable results.</p>
+            <div class="spacer"></div>
+            <p class="muted"><strong>Location:</strong> Dhaka, Bangladesh</p>
+            <p class="muted"><strong>Number:</strong> +8801859960199</p>
+            <p class="muted"><strong>Email:</strong> <a href="mailto:susenhl18@gmail.com" class="navlink" style="padding:2px 8px">susenhl18@gmail.com</a></p>
+          </div>
+          <div class="card">
+            <p style="font-weight:700">Highlights</p>
+            <ul class="muted">
+              <li>Commercial & social ad edits that convert.</li>
+              <li>Color-managed workflow for consistent looks.</li>
+              <li>YouTube SEO & growth strategies.</li>
+              <li>On-set direction & cinematography.</li>
+            </ul>
+            <div class="spacer"></div>
+            <a class="btn" href="https://drive.google.com/file/d/1ZWHJZpphfepReaTHeCBTJlqPQ77PJ3jh/view?usp=sharing" target="_blank" rel="noopener">View CV</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="section" id="skills">
+        <h4>The tools I know & Skills ✅</h4>
+        <div class="skills-grid">
+          <div class="skill">
+            <h5>Adobe Premiere Pro</h5>
+            <p class="muted">Professional video editing software for cinematic and marketing videos.</p>
+          </div>
+          <div class="skill">
+            <h5>Adobe After Effects</h5>
+            <p class="muted">Motion graphics and visual effects creation tool.</p>
+          </div>
+          <div class="skill">
+            <h5>DaVinci Resolve</h5>
+            <p class="muted">Advanced color grading and video post-production tool.</p>
+          </div>
+          <div class="skill">
+            <h5>Adobe Photoshop</h5>
+            <p class="muted">Photo editing and creative image manipulation software.</p>
+          </div>
+          <div class="skill">
+            <h5>Adobe Illustrator</h5>
+            <p class="muted">Vector design tool for logos and branding.</p>
+          </div>
+          <div class="skill">
+            <h5>Canva</h5>
+            <p class="muted">Easy online design platform for social media and marketing visuals.</p>
+          </div>
+        </div>
+      </section>
+      <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects</title>
+  <style>
+    body {
+      background: #0d1117;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 40px 8%;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #58a6ff;
+    }
+
+    /* Projects Grid Layout */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+      justify-content: center;
+    }
+
+    /* Each Project Card */
+    .project {
+      background: #161b22;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(88, 166, 255, 0.4);
+    }
+
+    /* Video Area (Fixed Size) */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 ratio */
+      background: #000;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Info Section */
+    .project-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .project-info h3 {
+      margin: 10px 0 5px;
+      color: #58a6ff;
+      font-size: 1.1rem;
+    }
+
+    .project-info p {
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.4;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 480px) {
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    ..about-susen-3d {
+  position: relative;
+  max-width: 950px;
+  margin: 100px auto;
+  padding: 60px 40px;
+  border-radius: 30px;
+  text-align: center;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 20px rgba(0, 255, 255, 0.15),
+    0 0 40px rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: perspective(900px) rotateX(1.5deg);
+  animation: glowMove 6s ease-in-out infinite alternate;
+}
+
+.about-susen-3d::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00e5ff38, #00ffcc34, #0066ff33);
+  z-index: -1;
+  filter: blur(25px);
+  opacity: 0.3;
+  animation: borderPulse 5s linear infinite;
+}
+
+.about-susen-3d h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #187680, #00ffcc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.918);
+}
+
+.about-susen-3d h2 span {
+  color: #00ffcc1f;
+}
+
+.about-susen-3d p {
+  font-size: 19px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.308);
+}
+
+/* Light floating glow motion */
+@keyframes glowMove {
+  0% {
+    box-shadow:
+      0 15px 30px rgba(0, 0, 0, 0.6),
+      inset 0 0 15px rgba(0, 255, 255, 0.1),
+      0 0 25px rgba(0, 255, 255, 0.05);
+    transform: perspective(900px) rotateX(2deg);
+  }
+  100% {
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.7),
+      inset 0 0 25px rgba(0, 255, 255, 0.2),
+      0 0 50px rgba(0, 255, 255, 0.1);
+    transform: perspective(900px) rotateX(0deg);
+  }
+}
+
+/* Border animation pulse */
+@keyframes borderPulse {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
+
+  </style>
+
+</head>
+<body>
+
+  <h1>My Projects</h1>
+     <section class="section" id="portfolio"></section>
+  <div class="projects">
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fqv-YWHU-Jk?si=m7AQr5DM6mR2J6P0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>1️⃣ App Advertising Video (Motion Graphics)
+</h3>
+        <p>🎬 Title: “Dynamic App Ad | Stunning Motion Graphics Promo”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/cy6M8oDzPjA?si=aNAtrqCNTTmeFsB9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="project-info">
+        <h3>2️⃣ App Promo Video (Motion Graphics)
+</h3>
+        <p>🎬 Title: “Modern App Promo | Sleek Motion Animation”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ADlBnIcA3B8?si=33HYFUDM5nGiMGdc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>3️⃣ Hotel Room Review Video for Ads
+</h3>
+        <p>🎬 Title: “Luxury Hotel Room Tour | Ad-Ready Review Video”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7cZ_Ip1RDM?si=BqEp2UmwYLq08xYz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="project-info">
+        <h3>4️⃣ AIS Documentary News Video for BTV
+</h3>
+        <p>🎬 Title: “AIS Innovation Story | Documentary News for BTV”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EUEBZUYT_k8?si=7HK-8VeP0yYzkEJz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="project-info">
+        <h3>5️⃣ Agriculture News Video for AIS
+</h3>
+        <p>🎬 Title: “Farming Future | Agriculture News Report for AIS”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/_Pnz2pkeZAk?si=P-JdP-lZsuOOQ-Lj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>6️⃣ Documentary on Marketing Strategy
+</h3>
+        <p>🎬 Title: “Inside Marketing Minds | Strategy Documentary”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/KBxsJbpPua4?si=1DbsLOzTV_xjwQDx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>7️⃣ T-Shirt Promo Video for Facebook Reels
+</h3>
+        <p>🎬 Title: “Trendy T-Shirt Promo | Eye-Catching Reels Ad”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BePoG2ONkTw?si=0pnBsP0O86UrfmAL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>8️⃣ Motion Graphics for Mobile App Promo
+</h3>
+        <p>🎬 Title: “Creative App Motion Design | Animated Promo”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hmYQBikVwK8?si=nzOXYzcXSyyjeRJO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>      </div>
+      <div class="project-info">
+        <h3>9️⃣ Show Advertising Promo Video
+</h3>
+        <p>🎬 Title: “Showtime Promo | Broadcast Advertising Video”
+</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QPn0Hqj5HUA?si=nQLBvVhmt1Vz3DMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="project-info">
+        <h3>🔟 Short Film for YouTube Videos</h3>
+        <p>🎬 Title: “Short Film Showcase | Cinematic YouTube Story”
+</p>
+      </div>
+    </div> 
+    </div>
+  </div>
+       </section>
+
+      <!-- Contact -->
+      <section class="section" id="contact">
+        <h4>Contact & Hire</h4>
+        <div class="contact" style="margin-top:12px">
+          <div class="info">
+            <p class="muted">Ready to start a project? Message me on WhatsApp or send an email using the form.</p>
+            <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <a class="btn" href="https://wa.me/8801XXXXXXXXX?text=Hi%20Susen,%20I%20want%20to%20hire%20you" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="navlink" href="mailto:susenhl18@gmail.com">Email</a>
+              <a class="navlink" href="#home">Home</a>
+            </div>
+          </div>
+
+          <div class="email">
+            <form id="contactForm" onsubmit="submitContact(event)">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <input type="text" id="name" placeholder="Your name" required>
+                <input type="email" id="email" placeholder="Your email" required>
+                <textarea id="message" placeholder="Project details" rows="3" required></textarea>
+                <button type="submit" class="btn">Send</button>
+                <small class="muted">Your message will be emailed to <b>susenhl18@gmail.com</b>.</small>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+       <div class="about-susen-3d">
+  <h2>আমি <span>সুশেন হালদার</span></h2>
+  <p>
+    আমি একজন <b>ভিডিও এডিটর</b> এবং <b>ভিডিওগ্রাফার</b>।  
+    আমি আপনার কোম্পানির গ্রোথের জন্য প্রয়োজনীয় সকল কাজ করি — যেমন  
+    <b>প্রোডাক্ট ভিডিও ধারণ, এডিটিং, আপলোড, বিজ্ঞাপন (Ad) রান করা,  
+    কাস্টমারের সাথে যোগাযোগ</b> এবং প্রোডাক্ট বিক্রি পর্যন্ত সম্পূর্ণ প্রক্রিয়া পরিচালনা করি।  
+    <br><br>
+    <b>আপনার কোম্পানির সফলতা আমার দায়িত্ব।</b>
+  </p>
+</div>
+
+
+      <footer>
+        © <span id="year"></span> Filmexss • Designed by Susen Halder — All rights reserved.
+      </footer>
+    </main>
+  </div>
+  <script>
+    
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+
+    // Contact form: try SMTPJS if token present, else fallback to mail client
+    function submitContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const from = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+
+      const SECURE_TOKEN = ""; // <- Optional: add your SMTPJS SecureToken here
+
+      if(SECURE_TOKEN){
+        Email.send({
+          SecureToken: SECURE_TOKEN,
+          To : 'susenhl18@gmail.com',
+          From : from,
+          Subject : 'New message from Portfolio — ' + name,
+          Body : `Name: ${name}<br>Email: ${from}<br><br>Message:<br>${msg}`
+        }).then(()=>{ alert('Message sent successfully ✅'); e.target.reset(); })
+          .catch(()=>{ alert('Could not send via SMTP. Opening your mail app...'); fallbackMail(name, from, msg); });
+      } else {
+        fallbackMail(name, from, msg);
+      }
+    }
+
+    function fallbackMail(name, from, msg){
+      const subject = encodeURIComponent('New message from Portfolio — ' + name);
+      const body = encodeURIComponent(`From: ${name} <${from}>
+
+${msg}`);
+      window.location.href = `mailto:susenhl18@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+  ...
+</section>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('nav ul');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+</body>
+</html>
